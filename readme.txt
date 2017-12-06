@@ -1,0 +1,1 @@
+run file index-kmean.html bang chrome
