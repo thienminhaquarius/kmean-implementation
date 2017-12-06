@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>K-mean Implementation</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="ham.js"></script>
+  <script src="kmean.js"></script>
+  <script src="default.js"></script>
+  <style>
+  	body{
+  		margin-left: 200px;
+  	}
+
+  </style>
+</head>
+<body>
+<h1>K-MEAN IMPLEMETATION/ THỰC THI THUẬT TOÁN K-MEAN</h1>
+<div>
+	<br>
+	<br>
+	<H3>Nội dung: Phân cụm cho các điểm trong không gian 2 chiều, dữ liệu vào là các điểm ở dạng số thực và số cụm cần phân loại</H3>
+	<hr>
+	<br>
+	Nhập vào số điểm cần phân cụm: <input type="number" id="soDiem">
+	| Nhập vào số cụm sẽ chia: <input type="number" id="soCum"><br><br>
+	<button onclick="taoFormNhap()">Tạo form nhập dữ liệu</button>
+	<button onclick="viDuMacDinh()">Ví dụ cho sẵn</button>
+</div>
+<br>
+<div id="nhapDuLieu">
+</div>
+<br>
+
+<p>
+	<button onclick="tinh()">Phân cụm</button>
+</p>
+<br>
+<hr>
+<div id="ketqua">
+	
+</div>
+
+
+<script type="text/javascript">
+	var data=[];
+	var cum=[];
+	function taoFormNhap(){
+		var soDiem=parseInt(document.getElementById("soDiem").value);
+		var soCum=parseInt(document.getElementById("soCum").value);
+		var txt=taoFormNhapLieu(soDiem);
+		//alert(txt);
+		document.getElementById("nhapDuLieu").innerHTML=txt;
+	}
+	function tinh(){
+		//data=[];
+		data=[];
+		cum=[];
+		var soDiem=parseInt(document.getElementById("soDiem").value);
+		var soCum=parseInt(document.getElementById("soCum").value);
+		//data=dataDefault;
+		data=createData(soDiem);
+		//alert(JSON.stringify(data));
+		cum=createCumData(soCum,data);
+		//alert(JSON.stringify(cum));
+		var ketqua=kmean(data,cum);
+		
+		document.getElementById("ketqua").innerHTML=trinhBayKetQua(data,cum);
+	}
+	function viDuMacDinh(){
+		var soCum=document.getElementById("soCum").value=cumDefault;
+		var soDiem=document.getElementById("soDiem").value=dataDefault.length;
+		var txt=taoFormNhapLieu(soDiem);
+
+		document.getElementById("nhapDuLieu").innerHTML=txt;
+		var index=0;
+		for(var i=0;i<soDiem;i++){
+			document.getElementById(index).value=dataDefault[i].x;
+			document.getElementById(index+1).value=dataDefault[i].y;
+			index+=2;
+		}
+	}
+	
+</script>
+</body>
+</html>
